@@ -14,32 +14,29 @@ class Page {
 		"data"=>[]
 	];
 
-	public function __construct($opts = array())
-	{
+    public function __construct($opts = array(), $tpl_dir = "./views/")
+    {   
+        $this->options = array_merge($this->defaults, $opts);
+ 
+        $config = array(
+            "tpl_dir"   => $tpl_dir,
+            "cache_dir" => "./views-cache/",
+            "debug"     => true
+        );
 
-		$this->options = array_merge($this->defaults, $opts);
-
-		$config = array(
-		    "base_url"      => null,
-		    "tpl_dir"       => $_SERVER['DOCUMENT_ROOT']."/views/",
-		    "cache_dir"     => $_SERVER['DOCUMENT_ROOT']."/views-cache/",
-		    "debug"         => false
-		);
-
-		Tpl::configure( $config );
-
-		$this->tpl = new Tpl();
-
-		if ($this->options['data']) $this->setData($this->options['data']);
-
-		if ($this->options['header'] === true) $this->tpl->draw("header", false);
-
-	}
-
+        Tpl::configure($config);
+ 
+        $this->tpl = new Tpl;
+ 
+        $this->setData($this->options["data"]);
+ 
+        if ( $this->options["header"] === true) $this->tpl->draw("header");
+ 
+    }
 	public function __destruct()
 	{
 
-		if ($this->options['footer'] === true) $this->tpl->draw("footer", false);
+		if ($this->options['footer'] === true) $this->tpl->draw("footer");
 
 	}
 
