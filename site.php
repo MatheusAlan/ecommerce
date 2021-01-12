@@ -3,6 +3,7 @@
 use \Hcode\Page;
 use \Hcode\PageAdmin;
 use \Hcode\Model\Products;
+use \Hcode\Model\Category;
 
 $app->get('/', function() {
 
@@ -14,6 +15,21 @@ $app->get('/', function() {
 		'products'=>Products::checkList($products)
 	]);
 
+});
+
+$app->get("/categories/:idcategory", function($idcategory){
+
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$page = new Page();
+
+	$page->setTpl("category",[
+		'category'=>$category->getValues(),
+		'products'=>Products::checkList($category->getProducts())
+	]);
 });
 
 ?>
