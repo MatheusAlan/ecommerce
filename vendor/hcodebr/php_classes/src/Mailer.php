@@ -7,13 +7,8 @@ use Rain\Tpl;
 class Mailer {
 
 	const USERNAME = "matheus.alan.souza.dias@gmail.com";
-<<<<<<< HEAD
     const PASSWORD = "988110401Matheus";
     const NAME_FROM = "Loja do Matheus";
-=======
-	const PASSWORD = "xxxxxxxxxxxxxx";
-	const NAME_FROM = "Loja do Matheus";
->>>>>>> d7277d6ef31b37b9ad7cb4a3906d70cacec5dff6
 
 	public function __construct($toAddress, $toName, $subject, $tplName, $data = array()){
 
